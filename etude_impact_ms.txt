@@ -1,0 +1,17 @@
+Maël Salomon
+
+
+
+User Story 1 :
+il faut ajouter une nouvelle colonne dans todos #id_user
+il faut modifier le todoController
+	il ajoute automatiquement id_user lors de la validation de requête
+	faire apparaître uniquement les todos de l'utilisateur
+mise a jour du seeder
+
+User Story 2 :
+on doit crée une nouvelle vue ''planning''  
+il faut ajouter une colonne date fin qui est nullable sur les todos 
+crée un controller PlanningController
+	il doivent être ordonné par date d'urgence
+mise a jour du seeder
