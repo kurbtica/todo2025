@@ -38,6 +38,11 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    public function todos()
+    {
+        return $this->hasMany(Todos::class);
+    }
+
     protected function casts(): array
     {
         return [

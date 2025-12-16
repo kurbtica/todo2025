@@ -28,7 +28,7 @@ class TodosSeeder extends Seeder
                 'texte' => $texte,
                 'termine' => rand(0, 1),
                 'important' => rand(0, 1),
-                'id_user' => rand(1, 2),
+                'user_id' => rand(1, 2),
             ];
         }
         // $data = [

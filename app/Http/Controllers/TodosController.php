@@ -10,7 +10,7 @@ class TodosController extends Controller
 {
     public function liste(Request $request)
     {
-        return view('home', ['todos' => Todos::where('id_user', $request->user()->id)->get(), 'categories' => Categories::all(), 'listes' => Listes::all()]);
+        return view('home', ['todos' => Todos::where('user_id', $request->user()->id)->get(), 'categories' => Categories::all(), 'listes' => Listes::all()]);
         // where('id_user', $request->user()->id)
     }
 

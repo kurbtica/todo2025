@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('texte');
             $table->boolean('termine')->default(0);
             $table->boolean('important')->default(0);
-            $table->integer('id_user')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamp('date_fin')->nullable();
 
             $table->integer('listes_id')->nullable();
             $table->foreign('listes_id')->references('id')->on('listes')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade');
 
             // Déclaraction de la clé primaire
