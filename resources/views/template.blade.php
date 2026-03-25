@@ -7,7 +7,11 @@
         <title>@yield('title')</title>
 
         
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @if (file_exists(public_path('build/manifest.json')))
+            @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @else
+            <!-- Vite manifest absent (tests/time CI). Assets non requis pour comportement back-end. -->
+        @endif
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark dark">
@@ -21,7 +25,9 @@
         </nav>
 
         @yield('content')
-        @vite(['resources/js/app.js'])
+        @if (file_exists(public_path('build/manifest.json')))
+            @vite(['resources/js/app.js'])
+        @endif
 
     </body>
 </html>
