@@ -100,7 +100,7 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
-    public function done(\Illuminate\Http\Request $request, $id)
+    public function done(Request $request, $id)
     {
         $todo = auth()->user()->todos()->findOrFail($id);
         $todo->termine = ! $todo->termine;
@@ -112,7 +112,7 @@ class TodosController extends Controller
         return redirect()->route('todo.liste');
     }
 
-    public function delete(\Illuminate\Http\Request $request, $id)
+    public function delete(Request $request, $id)
     {
         $todo = auth()->user()->todos()->findOrFail($id);
         if ($todo->termine) {
