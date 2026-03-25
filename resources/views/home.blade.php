@@ -82,7 +82,7 @@
                             <!--<button class="btn btn-primary btn-lg"><span class="fa fa-user"></span><br>Terminer</button>-->
                         @elseif ($todo->termine === 1)
                             <!-- Si un ToDo est terminé, Action à ajouter pour supprimer -->
-                            <a href="{{ route('todo.delete', ['id' => $todo->id]) }}" class="btn btn-danger"><i class="bi bi-trash3"></i></i></a>
+                            <a href="{{ route('todo.delete', ['id' => $todo->id]) }}" class="btn btn-danger btn-delete-todo" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-delete-url="{{ route('todo.delete', ['id' => $todo->id]) }}"><i class="bi bi-trash3"></i></i></a>
                             @if (session('validation'))
                                 <p class="alert alert-success">{{ session('validation') }}</p>
                             @endif
@@ -105,4 +105,38 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de confirmation de suppression -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirmation de suppression</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce todo ? Cette action est irréversible.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <a href="#" id="confirmDeleteUrl" class="btn btn-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var deleteModal = document.getElementById('confirmDeleteModal');
+    var confirmLink = document.getElementById('confirmDeleteUrl');
+
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var deleteUrl = button.getAttribute('data-delete-url');
+      if (deleteUrl) {
+        confirmLink.setAttribute('href', deleteUrl);
+      }
+    });
+  });
+</script>
 @endsection

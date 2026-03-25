@@ -72,6 +72,39 @@ class TodosValidationTest extends TestCase
         ]);
     }
 
+    public function test_todo_termine_peut_etre_supprime()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $todo = Todos::factory()->create([
+            'user_id' => $user->id,
+            'termine' => 1,
+        ]);
+
+        $response = $this->get(route('todo.delete', ['id' => $todo->id]));
+        $response->assertRedirect(route('todo.liste'));
+
+        $this->assertSoftDeleted('todos', ['id' => $todo->id]);
+    }
+
+    public function test_todo_non_termine_ne_peut_pas_etre_supprime()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $todo = Todos::factory()->create([
+            'user_id' => $user->id,
+            'termine' => 0,
+        ]);
+
+        $response = $this->get(route('todo.delete', ['id' => $todo->id]));
+        $response->assertRedirect(route('todo.liste'));
+        $response->assertSessionHas('message', 'Veuillez terminé la tache avant de la supprimer');
+
+        $this->assertDatabaseHas('todos', ['id' => $todo->id]);
+    }
+
     public function test_voir_la_connexion_de_test()
     {
         $this->assertSame('mysql', config('database.default'));
