@@ -14,7 +14,7 @@ class PlanningController extends Controller
     {
         return view('planning', ['todos' => Todos::whereNotNull('date_fin')->orderBy('date_fin', 'asc')->where('id_user', $request->user()->id)->get()]);
     }
-/*a*/
+
     /**
      * Show the form for creating a new resource.
      */
