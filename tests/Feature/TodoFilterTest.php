@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\Models\{Todos, User};
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class TodoFilterTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function filtering_ui_is_present()
     {
         $this->withoutExceptionHandling();
@@ -28,7 +29,7 @@ class TodoFilterTest extends TestCase
         $response->assertSee('fetchTodos(newFilter)');
     }
 
-    /** @test */
+    #[Test]
     public function controller_filters_results_correctly()
     {
         $this->withoutExceptionHandling();
