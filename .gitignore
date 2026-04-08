@@ -29,3 +29,4 @@ Thumbs.db/vendor
 /storage/framework/*
 /storage/logs/*
 database/*.sqlite
+sonar-project.properties
